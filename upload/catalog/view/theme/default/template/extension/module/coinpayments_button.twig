@@ -1,0 +1,54 @@
+<script src="https://checkout.coinpayments.net/static/js/checkout.js"></script>
+<div class="panel panel-default checkout-panel">
+    <div class="coinpayments-checkout-text">
+        <div>{{ heading_title }}</div>
+        <div>{{ text_description }}</div>
+    </div>
+    <div id="cps-button-container-3" ></div>
+</div>
+
+<script>
+    CoinPayments.Button({
+        style: {
+            color: "blue",
+            width: 180
+        },
+        //
+        // the `createInvoice` method is called when the user presses the
+        // Pay with CoinPayments button.
+        //
+        createInvoice: async function (data, actions) {
+            const invoiceId = await actions.invoice.create({
+                clientId: "3689892e68974efc85627f200861645f",
+                currencyId: "5057",
+                items: {{ items }},
+                amount: {
+                    breakdown: {{ taxes }},
+                    value: {{ total_price }}
+                }
+            });
+            return invoiceId;
+        }
+
+        //
+        // the button is rendered into a div with id `cps-button-container-1`
+        //
+
+    }).render("cps-button-container-3");
+</script>
+
+<style>
+    .checkout-panel {
+        text-align: center;
+        padding: 7px 0;
+        background: #f6f6f6;
+        font-size: 14px;
+    }
+
+
+    @media (min-width: 992px) {
+        .checkout-panel img {
+            top: -4px;
+        }
+    }
+</style>

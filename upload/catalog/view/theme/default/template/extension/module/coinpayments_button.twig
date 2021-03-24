@@ -20,7 +20,7 @@
         createInvoice: async function (data, actions) {
             const invoiceId = await actions.invoice.create({
                 clientId: {{ client_id }},
-                currencyId: "5057",
+                currencyId: {{ currency_id }},
                 items: {{ items }},
                 amount: {
                     breakdown: {{ taxes }},

@@ -15,6 +15,7 @@ class ControllerExtensionModuleCoinpaymentsButton extends Controller {
         }
         $data['taxes'] = json_encode(array("subtotal"=>strval( number_format($this->cart->getSubTotal(), 2, '', '')),"taxTotal"=>strval(number_format(array_sum($this->cart->getTaxes()), 2, '', ''))));
         $data['items'] = json_encode($data['items']);
+        $data['client_id'] = json_encode($this->config->get('payment_coinpayments_client_id'));
         if ($status) {
             return $this->load->view('extension/module/coinpayments_button', $data);
         }
